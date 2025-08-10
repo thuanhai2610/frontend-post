@@ -104,7 +104,8 @@ export default function ForumHome() {
   const [user, setUser] = useState<User | null>(null);
   const [showAuthPage, setShowAuthPage] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+const api = process.env.REACT_APP_BACKEND
+console.log(api)
   useEffect(() => {
     try {
       const token = localStorage.getItem("token");
@@ -119,7 +120,7 @@ export default function ForumHome() {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch("http://localhost:3000/posts/all");
+      const res = await fetch(`${api}/posts/all`);
       if (!res.ok) throw new Error("Failed to fetch posts");
       const data = await res.json();
       setPosts(data);

@@ -14,6 +14,7 @@ const AuthPage: React.FC<Props> = ({ onLoginSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [form, setForm] = useState<FormState>({ email: '', password: '' });
   const [message, setMessage] = useState('');
+const api = process.env.REACT_APP_BACKEND
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,8 +24,8 @@ const AuthPage: React.FC<Props> = ({ onLoginSuccess }) => {
     e.preventDefault();
     setMessage('');
     const url = isLogin
-      ? 'http://localhost:3000/auth/login'
-      : 'http://localhost:3000/auth/register';
+      ? `${api}/auth/login`
+      : `${api}/auth/register`;
 
     try {
       const res = await fetch(url, {

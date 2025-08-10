@@ -18,7 +18,7 @@ export default function CommentSection({ postId, comments, onCommentSuccess }: P
   const [newComment, setNewComment] = useState('');
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
-
+const api = process.env.REACT_APP_BACKEND
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -26,7 +26,7 @@ export default function CommentSection({ postId, comments, onCommentSuccess }: P
     if (!newComment.trim()) return;
 
     try {
-      const res = await fetch('http://localhost:3000/comments', {
+      const res = await fetch(`${api}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
